@@ -1,0 +1,21 @@
+p {
+  font-size: 2em;
+}
+
+h1 {
+  font-size: 3em;
+  color: grey;
+}
+
+p {
+  color: blue;
+  font-size: 1em;
+}
+
+main {
+  @include container(80%);
+  background-color: lightblue;
+  @include breakpoint($medium) {
+    background-color: yellow;
+  }
+}
