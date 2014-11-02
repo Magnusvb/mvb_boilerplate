@@ -13,32 +13,25 @@ module.exports = function(grunt) {
     //   }
     // },
 
-    watch: {
-      sass: {
-        files: 'src/scss/**/*.scss',
-        tasks: ['sass'],
-      },
-      files: ['app/*.html', 'src/js/main.js'],
-    },
-
     concat: {
-      options: {
-        separator: '§§§',
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      dev: {
+        src: [
+          'src/js/main.js',
+          'src/js/plugin.js',
+          'src/js/vendor/*.js'
+          ],
+        dest: 'app/js/main.js'
       },
-      build: {
-        src: ['src/js/*.js', 'src/**/*.js'],
-        dest: 'src/js/script.js'
-      }
     },
 
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
-      build: {
-        src: 'main.js',
-        dest: 'app/js/script.min.js'
+      dev: {
+        files: {
+          'app/js/main.min.js' : ['<%= concat.dev.dest %>']
+        }
       }
     },
 
@@ -47,11 +40,26 @@ module.exports = function(grunt) {
         options: {
           banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
           require: 'susy',
-          style: 'compressed'
+          style: 'compact'
         },
         files: {
           'app/css/app.min.css' : 'src/scss/app.scss'
         }
+      }
+    },
+
+    imagemin: {
+      options: {
+        optimizationLevel: 5,
+        progressive: true,
+      },
+      dev: {
+        files: [{
+          expand: true,
+          cwd: 'src/img/',
+          src: ['**/*.{png,jpg,gif}'],
+          dest: 'app/minimg/'
+        }]
       }
     },
 
@@ -65,13 +73,36 @@ module.exports = function(grunt) {
           baseDir: "app"
         }
       }
-    }
+    },
+
+    watch: {
+      scripts: {
+        files: ['src/js/*.js'],
+        tasks: ['concat'],
+        options: {
+          spawn: false,
+        },
+      },
+      sass: {
+        files: 'src/scss/**/*.scss',
+        tasks: ['sass'],
+        options: {
+          spawn: false,
+        },
+      },
+      imagemin: {
+        files: 'src/img/*.{png,jpg,gif}',
+        tasks: ['newer:imagemin'],
+      },
+      files: ['app/*.html', 'src/js/main.js'],
+    },
   });
 
   // Start web server
-  grunt.loadNpmTasks('grunt-contrib-connect');
+  // grunt.loadNpmTasks('grunt-contrib-connect');
 
-  
+  // Just check for newer files
+  grunt.loadNpmTasks('grunt-newer');
 
   // Load the sass plugin
   grunt.loadNpmTasks('grunt-contrib-sass');
@@ -81,6 +112,9 @@ module.exports = function(grunt) {
 
   // Concat js files
   grunt.loadNpmTasks('grunt-contrib-concat');
+
+  // Minfy images
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   // Watch changes
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -93,9 +127,9 @@ module.exports = function(grunt) {
     'browserSync',
     'watch',
     'sass', 
-    'connect', 
+    'concat', 
     'uglify', 
-    'concat',
+    'newer:imagemin'
     ]);
 
 };
