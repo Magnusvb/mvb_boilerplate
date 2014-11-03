@@ -10,4 +10,11 @@
 @import 'base/normalize';
 
 // Import modules
-@import 'text';
+@import 'modules/base';
+@import 'modules/mixins';
+@import 'modules/extend';
+@import 'modules/typography';
+@import 'modules/forms';
+
+// Import page sections layouts
+@import 'layouts/main';

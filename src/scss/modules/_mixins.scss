@@ -1,0 +1,13 @@
+// Mixins
+
+// Font-size in rem with fallback
+// Usage: @include font-size-rem(14px)
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1rem;
+}
+
+@mixin font-size-rem($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}

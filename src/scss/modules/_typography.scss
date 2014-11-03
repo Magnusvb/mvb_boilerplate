@@ -8,3 +8,13 @@
     font-weight:normal;
     font-style:normal;
 }
+
+h1 {
+  @include font-size-rem(60px);
+  color: grey;
+}
+
+p {
+  color: black;
+  @include font-size-rem(20px);
+}
