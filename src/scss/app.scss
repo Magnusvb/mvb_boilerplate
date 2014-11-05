@@ -3,11 +3,12 @@
 @import 'susy';
 @import 'bourbon/bourbon';
 
-// Import config (UI, colors and Susy settings) for the site
-@import 'base/config';
-
 // Import css normalize
 @import 'base/normalize';
+
+// Import config (UI, colors and Susy settings) for the site
+@import 'base/config';
+@import 'base/vars';
 
 // Import modules
 @import 'modules/base';
