@@ -1,1 +1,13 @@
-// Extend
+// Basic button
+%button {
+    display: inline-block;
+    border: none;
+    background: $cta-button-color;
+    outline: none;
+    text-decoration: none;
+    line-height: 1;
+    
+    &:disabled {
+        opacity: 0.5;
+    }
+}
