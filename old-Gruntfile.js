@@ -4,17 +4,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
-      options: {
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      dist: {
-        src: [
-          'src/js/main.js',
-          'src/js/plugin.js',
-          'src/js/vendor/*.js'
-          ],
-        dest: 'app/js/main.js'
-      },
       dev: {
         src: [
           'src/js/main.js',
@@ -22,24 +11,14 @@ module.exports = function(grunt) {
           'src/js/vendor/*.js'
           ],
         dest: 'app/js/main.js'
-      }
+      },
     },
 
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
       },
-      dist: {
-        files: {
-          'app/js/main.min.js' : ['<%= concat.dev.dest %>']
-        }          
-      },
       dev: {
-        options: {
-          compress: false,
-          beautify: true,
-          mangle: false
-        },
         files: {
           'app/js/main.min.js' : ['<%= concat.dev.dest %>']
         }
@@ -47,21 +26,11 @@ module.exports = function(grunt) {
     },
 
     sass: {
-      dist: {
-        options: {
-          banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-          require: 'susy',
-          style: 'compressed'
-        },
-        files: {
-          'app/css/app.min.css' : 'src/scss/app.scss'
-        }
-      },
       dev: {
         options: {
           banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
           require: 'susy',
-          style: 'expanded'
+          style: 'compact'
         },
         files: {
           'app/css/app.min.css' : 'src/scss/app.scss'
@@ -74,20 +43,12 @@ module.exports = function(grunt) {
         optimizationLevel: 5,
         progressive: true,
       },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: 'src/img/',
-          src: ['**/*.{png,jpg,gif}'],
-          dest: 'app/img/'
-        }]
-      },
       dev: {
         files: [{
           expand: true,
           cwd: 'src/img/',
           src: ['**/*.{png,jpg,gif}'],
-          dest: 'app/img/'
+          dest: 'app/minimg/'
         }]
       }
     },
@@ -158,20 +119,6 @@ module.exports = function(grunt) {
     'sass', 
     'concat', 
     'uglify', 
-    'newer:imagemin'
-    ]);
-  grunt.registerTask('dev', [  
-    'browserSync',
-    'watch',
-    'sass:dev', 
-    'concat:dev', 
-    'uglify:dev', 
-    'newer:imagemin'
-    ]);
-  grunt.registerTask('dist', [  
-    'sass:dist', 
-    'concat:dist', 
-    'uglify:dist', 
     'newer:imagemin'
     ]);
 

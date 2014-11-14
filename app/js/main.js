@@ -1,3 +1,4 @@
+/*! mvb_boilerplate 2014-11-14 */
 (function ($, window, document, undefined) {
 
   'use strict';

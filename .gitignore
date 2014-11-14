@@ -5,3 +5,5 @@ mvb_boilerplate.sublime-workspace
 node_modules
 app/css/app.min.css
 app/css/app.min.css.map
+app/js/main.js
+app/js/main.min.js
