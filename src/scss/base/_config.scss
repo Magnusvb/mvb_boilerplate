@@ -1,4 +1,9 @@
-// Breakpoints
-$small: 500px;
-$medium: 750px;
-$large: 1100px;
+// Default example breakpoints. Add and/or change to suit your design.
+// Usage example:
+// @include breakpoint($medium) {
+//    background-color: purple;
+// }
+
+$small: 40em;
+$medium: 45em;
+$large: 55em;
