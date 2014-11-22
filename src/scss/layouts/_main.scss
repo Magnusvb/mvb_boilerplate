@@ -2,6 +2,6 @@ main {
   @include container(80%);
   background-color: lightblue;
   @include breakpoint($medium) {
-    background-color: yellow;
+    background-color: #edd058;
   }
 }

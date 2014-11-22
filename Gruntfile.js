@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
@@ -12,7 +12,7 @@ module.exports = function(grunt) {
           'src/js/main.js',
           'src/js/plugin.js',
           'src/js/vendor/*.js'
-          ],
+        ],
         dest: 'app/js/main.js'
       },
       dev: {
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
           'src/js/main.js',
           'src/js/plugin.js',
           'src/js/vendor/*.js'
-          ],
+        ],
         dest: 'app/js/main.js'
       }
     },
@@ -31,8 +31,8 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'app/js/main.min.js' : ['<%= concat.dev.dest %>']
-        }          
+          'app/js/main.min.js': ['<%= concat.dev.dest %>']
+        }
       },
       dev: {
         options: {
@@ -41,7 +41,7 @@ module.exports = function(grunt) {
           mangle: false
         },
         files: {
-          'app/js/main.min.js' : ['<%= concat.dev.dest %>']
+          'app/js/main.min.js': ['<%= concat.dev.dest %>']
         }
       }
     },
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
           style: 'compressed'
         },
         files: {
-          'app/css/app.min.css' : 'src/scss/app.scss'
+          'app/css/app.min.css': 'src/scss/app.scss'
         }
       },
       dev: {
@@ -64,7 +64,7 @@ module.exports = function(grunt) {
           style: 'expanded'
         },
         files: {
-          'app/css/app.min.css' : 'src/scss/app.scss'
+          'app/css/app.min.css': 'src/scss/app.scss'
         }
       }
     },
@@ -72,7 +72,7 @@ module.exports = function(grunt) {
     imagemin: {
       options: {
         optimizationLevel: 5,
-        progressive: true,
+        progressive: true
       },
       dist: {
         files: [{
@@ -94,7 +94,7 @@ module.exports = function(grunt) {
 
     browserSync: {
       bsFiles: {
-        src : ['app/css/*.css', 'app/*html']
+        src: ['app/css/*.css', 'app/*html']
       },
       options: {
         watchTask: true,
@@ -109,29 +109,26 @@ module.exports = function(grunt) {
         files: ['src/js/*.js'],
         tasks: ['concat'],
         options: {
-          spawn: false,
-        },
+          spawn: false
+        }
       },
       sass: {
         files: 'src/scss/**/*.scss',
         tasks: ['sass'],
         options: {
-          spawn: false,
-        },
+          spawn: false
+        }
       },
       imagemin: {
         files: 'src/img/*.{png,jpg,gif}',
-        tasks: ['newer:imagemin'],
+        tasks: ['newer:imagemin:dev']
       },
-      files: ['app/*.html', 'src/js/main.js'],
-    },
+      files: ['app/*.html', 'src/js/main.js']
+    }
   });
 
   // Start web server
   // grunt.loadNpmTasks('grunt-contrib-connect');
-
-  // Just check for newer files
-  grunt.loadNpmTasks('grunt-newer');
 
   // Load the sass plugin
   grunt.loadNpmTasks('grunt-contrib-sass');
@@ -147,32 +144,35 @@ module.exports = function(grunt) {
 
   // Watch changes
   grunt.loadNpmTasks('grunt-contrib-watch');
+  
+  // Just check for newer files
+  grunt.loadNpmTasks('grunt-newer');
 
   // Load Browsersync
   grunt.loadNpmTasks('grunt-browser-sync');
 
   // Default task(s).
-  grunt.registerTask('default', [  
+  grunt.registerTask('default', [
     'browserSync',
     'watch',
-    'sass', 
-    'concat', 
-    'uglify', 
+    'sass',
+    'concat',
+    'uglify',
     'imagemin'
-    ]);
-  grunt.registerTask('dev', [  
+  ]);
+  grunt.registerTask('dev', [
     'browserSync',
     'watch',
-    'sass:dev', 
-    'concat:dev', 
-    'uglify:dev', 
+    'sass:dev',
+    'concat:dev',
+    'uglify:dev',
     'newer:imagemin:dev'
-    ]);
-  grunt.registerTask('dist', [  
-    'sass:dist', 
-    'concat:dist', 
-    'uglify:dist', 
+  ]);
+  grunt.registerTask('dist', [
+    'sass:dist',
+    'concat:dist',
+    'uglify:dist',
     'newer:imagemin:dist'
-    ]);
+  ]);
 
 };
