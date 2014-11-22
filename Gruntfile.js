@@ -158,7 +158,7 @@ module.exports = function(grunt) {
     'sass', 
     'concat', 
     'uglify', 
-    'newer:imagemin'
+    'imagemin'
     ]);
   grunt.registerTask('dev', [  
     'browserSync',
@@ -166,13 +166,13 @@ module.exports = function(grunt) {
     'sass:dev', 
     'concat:dev', 
     'uglify:dev', 
-    'newer:imagemin'
+    'newer:imagemin:dev'
     ]);
   grunt.registerTask('dist', [  
     'sass:dist', 
     'concat:dist', 
     'uglify:dist', 
-    'newer:imagemin'
+    'newer:imagemin:dist'
     ]);
 
 };
