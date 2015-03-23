@@ -3,7 +3,7 @@
   'use strict';
 
   $(function () {
-    // My stuff goes here
+    // Your stuff goes here XXX
   });
 
 })(jQuery, window, document);

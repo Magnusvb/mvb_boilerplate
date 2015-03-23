@@ -9,19 +9,19 @@ module.exports = function (grunt) {
       },
       dist: {
         src: [
-          'src/js/main.js',
+          'src/js/modernizr-2.8.3.js',
           'src/js/plugin.js',
-          'src/js/vendor/*.js'
+          'src/js/main.js'
         ],
-        dest: 'app/js/main.js'
+        dest: 'app/js/main.min.js'
       },
       dev: {
         src: [
-          'src/js/main.js',
+          'src/js/modernizr-2.8.3.js',
           'src/js/plugin.js',
-          'src/js/vendor/*.js'
+          'src/js/main.js'
         ],
-        dest: 'app/js/main.js'
+        dest: 'app/js/main.min.js'
       }
     },
 
